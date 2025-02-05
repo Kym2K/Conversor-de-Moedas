@@ -1,46 +1,47 @@
 const convertButton = document.querySelector(".botao-converter")
 const currencySelect = document.querySelector(".currency-select")
 
-function convertValues() {
+const convertValues = async() =>{
     const inputCurrencyValue = document.querySelector(".input-value").value
     const currencyValueToConvert = document.querySelector(".currency-value")
-    const currencyValueConverted = document.querySelector(".currency-value-converted")
+    const currencyValueConverted = document.querySelector(".currency-value-converted");
 
-    const dolarTuday = 5.2
-    const euroTuday = 6.4
-    const libraTuday = 4.0
+   const data = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL").then( response => response.json())
+
+   const dolar = data.USDBRL.high
+   const euro = data.EURBRL.high
+
 
     if (currencySelect.value == "dolar") {
         currencyValueConverted.innerHTML = new Intl.NumberFormat("en-US", {
             style: "currency",
-            currency: "USD"
-        }).format(inputCurrencyValue / dolarTuday)
+            currency: "USD",
+        }).format(inputCurrencyValue / dolar);
 
     }
 
     if (currencySelect.value == "euro") {
         currencyValueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
             style: "currency",
-            currency: "EUR"
-        }).format(inputCurrencyValue / euroTuday)
+            currency: "EUR",
+        }).format(inputCurrencyValue / euro);
 
     }
 
     if (currencySelect.value == "libra") {
         currencyValueConverted.innerHTML = new Intl.NumberFormat("de-RU", {
             style: "currency",
-            currency: "GBP"
-        }).format(inputCurrencyValue / libraTuday)
+            currency: "GBP",
+        }).format(inputCurrencyValue / libraTuday);
 
     }
 
     currencyValueToConvert.innerHTML = new Intl.NumberFormat("pt-BR", {
         style: "currency",
-        currency: "BRL"
-    }).format(inputCurrencyValue)
+        currency: "BRL",
+    }).format(inputCurrencyValue);
 
-
-}
+};
 
 function changeCurrency() {
     const currencyName = document.getElementById("currency-name")
