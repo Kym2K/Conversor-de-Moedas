@@ -50,7 +50,7 @@ function changeCurrency() {
 
     if (currencySelect.value == "dolar") {
         currencyName.innerHTML = "Dólar Americano"
-        currencyImage.src = "./img/dolar.png"
+        currencyImage.src = "./img/Dolar.png"
 
     }
 
